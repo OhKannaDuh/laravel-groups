@@ -15,7 +15,7 @@ class Group extends Model
 
 
     /**
-     * This method links through to the _addUser method and then reloads the users relationship.
+     * Adds a user to a group using the _addUser method and then reloads the users property.
      *
      * @param Model $user
      *
@@ -30,7 +30,7 @@ class Group extends Model
 
 
     /**
-     * This method loops over the given collection and calls the _AddUser method with them, then it reloads the users relationship.
+     * Adds a collection of users to a group using the _addUser method and then reloads the users property.
      *
      * @param Collection $users
      *
@@ -46,7 +46,7 @@ class Group extends Model
     }
 
     /**
-     * This method attaches the given object to the users collection assuming it matches your configured user class.
+     * Removes the given user from the group.
      *
      * @param Model $user
      *
