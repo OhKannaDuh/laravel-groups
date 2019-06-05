@@ -1,0 +1,44 @@
+{
+    "name": "ohkannaduh/groups",
+    "description": "Group users in laravel.",
+    "keywords": ["laravel", "groups"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "OhKannaDuh",
+            "email": "Liammcnair@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "OhKannaDuh\\Groups\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "vendor/laravel/laravel/tests/TestCase.php"
+        ],
+        "psr-4": {
+            "OhKannaDuh\\Groups\\Test\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.2"
+    },
+    "require-dev": {
+        "laravel/laravel": "^5.8",
+        "orchestra/testbench": "^3.8"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OhKannaDuh\\Groups\\GroupsServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/phpunit"
+        ]
+    }
+}
