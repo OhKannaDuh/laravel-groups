@@ -83,6 +83,22 @@ class GroupTest extends TestCase
 
 
     /**
+     * Ensure we can't add a user to a group if they're already in it.
+     */
+    public function testAddUserThatIsInGroup(): void
+    {
+        $group = $this->getGroup();
+        factory(User::class)->create();
+        $user = User::firstOrFail();
+
+        $group->addUser($user);
+        $group->addUser($user);
+
+        $this->assertCount(1, $group->users);
+    }
+
+
+    /**
      * Ensures users are correctly removed from a group.
      *
      * @depends testAddUsers
@@ -101,6 +117,24 @@ class GroupTest extends TestCase
         $user = User::firstOrFail();
         $group->removeUser($user);
         $this->assertCount(2, $group->users);
+    }
+
+
+
+    /**
+     * Ensure we can't add a user to a group if they're already in it.
+     */
+    public function testRemoveUserThatIsntInGroup(): void
+    {
+        $group = $this->getGroup();
+        factory(User::class, 2)->create();
+        $user1 = User::findOrFail(1);
+        $user2 = User::findOrFail(2);
+
+        $group->addUser($user1);
+        $group->removeUser($user2);
+
+        $this->assertCount(1, $group->users);
     }
 
 
@@ -144,5 +178,20 @@ class GroupTest extends TestCase
         $users = User::find(range(1, 3));
         $group->removeUsers($users);
         $this->assertCount(2, $group->users);
+    }
+
+
+    /**
+     * Ensures we check if a given user is in a group correctly.
+     */
+    public function testContains()
+    {
+        $group = $this->getGroup();
+        factory(User::class, 5)->create();
+
+        $group->addUsers(User::all());
+        $user = User::firstOrFail();
+
+        $this->assertTrue($group->contains($user));
     }
 }

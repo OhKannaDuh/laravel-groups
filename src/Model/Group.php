@@ -87,7 +87,7 @@ class Group extends Model
      */
     private function _addUser(Model $user): void
     {
-        if ($this->isUser($user)) {
+        if ($this->isUser($user) === true && $this->contains($user) === false) {
             $this->users()->attach($user->id);
         }
     }
@@ -102,9 +102,22 @@ class Group extends Model
      */
     private function _removeUser(Model $user): void
     {
-        if ($this->isUser($user)) {
+        if ($this->isUser($user) === true && $this->contains($user) === true) {
             $this->users()->detach($user->id);
         }
+    }
+
+
+    /**
+     * Checks if the given user is in this group.
+     *
+     * @param Model $user
+     *
+     * @return bool
+     */
+    public function contains(Model $user): bool
+    {
+        return $this->users->contains($user);
     }
 
 

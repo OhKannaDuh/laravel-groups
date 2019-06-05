@@ -69,6 +69,11 @@ $group->removeUser($user);
 $group->removeUsers($users);
 ```
 
+#### Check if a user is in a group
+```php
+$group->contains($user)
+```
+
 #### Get all users in a group
 ```php
 $group->users
