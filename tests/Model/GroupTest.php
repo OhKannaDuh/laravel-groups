@@ -120,7 +120,6 @@ class GroupTest extends TestCase
     }
 
 
-
     /**
      * Ensure we can't add a user to a group if they're already in it.
      */
@@ -184,7 +183,7 @@ class GroupTest extends TestCase
     /**
      * Ensures we check if a given user is in a group correctly.
      */
-    public function testContains()
+    public function testContains(): void
     {
         $group = $this->getGroup();
         factory(User::class, 5)->create();

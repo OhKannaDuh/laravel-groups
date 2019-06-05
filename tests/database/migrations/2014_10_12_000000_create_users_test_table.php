@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTestTable extends Migration
 {
+
+
     /**
      * Run the migrations.
      *
@@ -23,6 +25,7 @@ class CreateUsersTestTable extends Migration
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

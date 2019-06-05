@@ -5,6 +5,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateGroupUserTable extends Migration
 {
+
+
 /**
      * Run the migrations.
      *
@@ -20,6 +22,8 @@ class CreateGroupUserTable extends Migration
             $table->timestamps();
         });
     }
+
+
     /**
      * Reverse the migrations.
      *

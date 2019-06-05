@@ -22,6 +22,7 @@ class GroupsServiceProvider extends ServiceProvider
         ]);
     }
 
+
     /**
      * Register services.
      *
