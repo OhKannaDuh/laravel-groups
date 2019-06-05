@@ -59,6 +59,16 @@ $group->addUser($user);
 $group->addUsers($users);
 ```
 
+#### Remove a user from a group
+```php
+$group->removeUser($user);
+```
+
+#### Remove a colleciton of users from a group
+```php
+$group->removeUsers($users);
+```
+
 #### Get all users in a group
 ```php
 $group->users

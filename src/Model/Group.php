@@ -45,6 +45,39 @@ class Group extends Model
         $this->load("users");
     }
 
+
+    /**
+     * Removes a user from a group using the _removeUser method and then reloads the users property.
+     *
+     * @param Model $user
+     *
+     * @return void
+     */
+    public function removeUser(Model $user): void
+    {
+        $this->_removeUser($user);
+
+        $this->load("users");
+    }
+
+
+    /**
+     * Removes a collection of user from a group using the _removeUser method and then reloads the users property.
+     *
+     * @param Collection $users
+     *
+     * @return void
+     */
+    public function removeUsers(Collection $users): void
+    {
+        foreach ($users as $user) {
+            $this->_removeUser($user);
+        }
+
+        $this->load("users");
+    }
+
+
     /**
      * Removes the given user from the group.
      *
@@ -56,6 +89,21 @@ class Group extends Model
     {
         if ($this->isUser($user)) {
             $this->users()->attach($user->id);
+        }
+    }
+
+
+    /**
+     * Removes the given user from the group.
+     *
+     * @param Model $user
+     *
+     * @return void
+     */
+    private function _removeUser(Model $user): void
+    {
+        if ($this->isUser($user)) {
+            $this->users()->detach($user->id);
         }
     }
 

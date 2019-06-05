@@ -80,4 +80,69 @@ class GroupTest extends TestCase
 
         $this->assertCount(3, $group->users);
     }
+
+
+    /**
+     * Ensures users are correctly removed from a group.
+     *
+     * @depends testAddUsers
+     */
+    public function testRemoveUser(): void
+    {
+        $group = $this->getGroup();
+
+        factory(User::class, 3)->create();
+        $users = User::all();
+
+        $group->addUsers($users);
+
+        $this->assertCount(3, $group->users);
+
+        $user = User::firstOrFail();
+        $group->removeUser($user);
+        $this->assertCount(2, $group->users);
+    }
+
+
+    /**
+     * Ensures users are correctly removed from the group_user pivot table.
+     *
+     * @depends testRemoveUser
+     */
+    public function testRemoveUserPivotTable(): void
+    {
+        $group = $this->getGroup();
+
+        factory(User::class)->create();
+        $user = User::firstOrFail();
+
+        $group->addUser($user);
+        $users = DB::table("group_user")->get();
+        $this->assertCount(1, $users);
+
+        $group->removeUser($user);
+        $users = DB::table("group_user")->get();
+        $this->assertCount(0, $users);
+    }
+
+
+    /**
+     * Ensures all users are removed from a group.
+     *
+     * @depends testRemoveUser
+     */
+    public function testRemoveUsers(): void
+    {
+        $group = $this->getGroup();
+
+        factory(User::class, 5)->create();
+
+        $users = User::all();
+        $group->addUsers($users);
+        $this->assertCount(5, $group->users);
+
+        $users = User::find(range(1, 3));
+        $group->removeUsers($users);
+        $this->assertCount(2, $group->users);
+    }
 }
