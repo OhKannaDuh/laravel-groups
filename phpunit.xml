@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    bootstrap="vendor/autoload.php"
-    colors="true"
-    convertErrorsToExceptions="true"
-    convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true"
-    printerClass="gh640\PhpunitTap\TapResultPrinter">
+        colors="true"
+        convertErrorsToExceptions="true"
+        convertNoticesToExceptions="true"
+        convertWarningsToExceptions="true"
+        processIsolation="false"
+        stopOnFailure="false">
 
     <testsuites>
         <testsuite name="Unit">
@@ -30,5 +30,6 @@
 
     <logging>
         <log type="coverage-html" target="build/coverage"/>
+        <log type="coverage-clover" target="clover.xml"/>
     </logging>
 </phpunit>

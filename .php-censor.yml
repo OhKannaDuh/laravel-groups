@@ -1,0 +1,23 @@
+build_settings:
+  ignore:
+    - ./vendor
+    - ./tests
+    - ./build
+  allowed_warnings: -1
+
+setup:
+  composer:
+    action: install
+
+test:
+  php_unit:
+    config:
+      - phpunit.xml
+    directories:
+      - tests
+    coverage: true
+  security_checker: ~
+  php_parallel_lint: ~
+  php_code_sniffer:
+    standard: PSR2
+    allowed_errors: -1

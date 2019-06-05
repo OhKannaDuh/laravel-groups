@@ -83,5 +83,3 @@ $group->users
 ```php
 $user->groups
 ```
-
-## Testing
