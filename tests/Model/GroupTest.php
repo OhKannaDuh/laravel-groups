@@ -27,7 +27,7 @@ class GroupTest extends TestCase
 
 
     /**
-     * Ensures users are correctly added to a groups users property.
+     * Ensures users are correctly added to a group.
      */
     public function testAddUser(): void
     {
@@ -46,7 +46,7 @@ class GroupTest extends TestCase
 
 
     /**
-     * Ensures users added to a group are correctly added to the group_user table.
+     * Ensures users are correctly added to the group_user pivot table.
      *
      * @depends testAddUser
      */
