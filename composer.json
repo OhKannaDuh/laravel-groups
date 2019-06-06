@@ -27,7 +27,8 @@
     },
     "require-dev": {
         "laravel/laravel": "^5.8",
-        "orchestra/testbench": "^3.8"
+        "orchestra/testbench": "^3.8",
+        "phpmd/phpmd": "^2.6"
     },
     "extra": {
         "laravel": {

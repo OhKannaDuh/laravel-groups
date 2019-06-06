@@ -21,3 +21,5 @@ test:
   php_code_sniffer:
     standard: PSR2
     allowed_errors: -1
+  php_mess_detector:
+    allow_failures: false

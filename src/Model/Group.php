@@ -15,7 +15,7 @@ class Group extends Model
 
 
     /**
-     * Adds a user to a group using the _addUser method and then reloads the users property.
+     * Adds a user to a group using the addUserToGroup method and then reloads the users property.
      *
      * @param Model $user
      *
@@ -23,14 +23,14 @@ class Group extends Model
      */
     public function addUser(Model $user): void
     {
-        $this->_addUser($user);
+        $this->addUserToGroup($user);
 
         $this->load("users");
     }
 
 
     /**
-     * Adds a collection of users to a group using the _addUser method and then reloads the users property.
+     * Adds a collection of users to a group using the addUserToGroup method and then reloads the users property.
      *
      * @param Collection $users
      *
@@ -39,7 +39,7 @@ class Group extends Model
     public function addUsers(Collection $users): void
     {
         foreach ($users as $user) {
-            $this->_addUser($user);
+            $this->addUserToGroup($user);
         }
 
         $this->load("users");
@@ -47,7 +47,7 @@ class Group extends Model
 
 
     /**
-     * Removes a user from a group using the _removeUser method and then reloads the users property.
+     * Removes a user from a group using the removeUserFromGroup method and then reloads the users property.
      *
      * @param Model $user
      *
@@ -55,14 +55,14 @@ class Group extends Model
      */
     public function removeUser(Model $user): void
     {
-        $this->_removeUser($user);
+        $this->removeUserFromGroup($user);
 
         $this->load("users");
     }
 
 
     /**
-     * Removes a collection of user from a group using the _removeUser method and then reloads the users property.
+     * Removes a collection of user from a group using the removeUserFromGroup method and then reloads the users property.
      *
      * @param Collection $users
      *
@@ -71,7 +71,7 @@ class Group extends Model
     public function removeUsers(Collection $users): void
     {
         foreach ($users as $user) {
-            $this->_removeUser($user);
+            $this->removeUserFromGroup($user);
         }
 
         $this->load("users");
@@ -85,7 +85,7 @@ class Group extends Model
      *
      * @return void
      */
-    private function _addUser(Model $user): void
+    private function addUserToGroup(Model $user): void
     {
         if ($this->isUser($user) === true && $this->contains($user) === false) {
             $this->users()->attach($user->id);
@@ -100,7 +100,7 @@ class Group extends Model
      *
      * @return void
      */
-    private function _removeUser(Model $user): void
+    private function removeUserFromGroup(Model $user): void
     {
         if ($this->isUser($user) === true && $this->contains($user) === true) {
             $this->users()->detach($user->id);
