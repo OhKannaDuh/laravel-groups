@@ -31,4 +31,12 @@ interface GroupableContract
      * @return bool
      */
     public function canRemoveFromGroup(Group $group): bool;
+
+
+    /**
+     * Determines if thie Groupable can send a message to the group.
+     *
+     * @return bool
+     */
+    public function canSendMessageToGroup(Group $group): bool;
 }

@@ -34,4 +34,15 @@ trait Groupable
     {
         return true;
     }
+
+
+    /**
+     * Determines if thie Groupable can send a message to the group.
+     *
+     * @return bool
+     */
+    public function canSendMessageToGroup(Group $group): bool
+    {
+        return true;
+    }
 }
