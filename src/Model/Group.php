@@ -139,6 +139,11 @@ class Group extends Model implements \Countable
     }
 
 
+    /**
+     * Gets a collection of users in this group.
+     *
+     * @return BelongsToMany
+     */
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(config("groups.user_class"), "group_user");
