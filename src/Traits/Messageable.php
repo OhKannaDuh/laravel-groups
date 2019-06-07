@@ -31,6 +31,7 @@ trait Messageable
         if ($this->canSendMessage($sender) === false) {
             return false;
         }
+
         $message = new Message([
             "user_id" => $sender->id,
             "group_id" => $this->id,
@@ -50,6 +51,9 @@ trait Messageable
      */
     public function canSendMessage(GroupableContract $sender): bool
     {
-        return $this->contains($sender);
+        return (
+            $this->contains($sender) === true
+            && $sender->canSendMessageToGroup($this) === true
+        );
     }
 }
