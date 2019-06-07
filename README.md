@@ -1,3 +1,5 @@
+[![PHP Censor](https://build.ohkannaduh.com/build-status/image/1?branch=master&label=PHPCensor&style=flat-square)](http://ci.php-censor.info/build-status/view/2?branch=master)
+
 # Laravel Groups
 
 This package allows you to group your user models, you can use this for various things.
