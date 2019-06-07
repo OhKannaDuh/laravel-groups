@@ -97,6 +97,22 @@ class Group extends Model implements \Countable
 
 
     /**
+     * Checks if the given user can be removed from this group.
+     *
+     * @param GroupableContract $user
+     *
+     * @return bool
+     */
+    public function canRemoveFromGroup(GroupableContract $user): bool
+    {
+        return (
+            $user->canRemoveFromGroup($this) === true
+            && $this->contains($user) === true
+        );
+    }
+
+
+    /**
      * Removes the given user from the group.
      *
      * @param GroupableContract $user
@@ -120,7 +136,7 @@ class Group extends Model implements \Countable
      */
     private function removeUserFromGroup(GroupableContract $user): void
     {
-        if ($this->contains($user) === true) {
+        if ($this->canRemoveFromGroup($user) === true) {
             $this->users()->detach($user->id);
         }
     }
