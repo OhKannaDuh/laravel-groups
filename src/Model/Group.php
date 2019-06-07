@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use OhKannaDuh\Groups\Contracts\GroupableContract;
+use OhKannaDuh\Groups\Contracts\MessageableContract;
+use OhKannaDuh\Groups\Traits\Messageable;
 
-class Group extends Model implements \Countable
+class Group extends Model implements \Countable, MessageableContract
 {
+    use Messageable;
+
     /** @var array */
     protected $fillable = [
         "name", "image", "key"
