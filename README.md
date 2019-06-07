@@ -79,13 +79,29 @@ $group->contains($user)
 
 #### Get all users in a group
 ```php
-$group->users
+$group->users;
 ```
 
 #### Get all groups for a user
 ```php
-$user->groups
+$user->groups;
 ```
+
+#### Gets all messages for a group
+```php
+$group->messages;
+```
+
+#### Gets the sender of a message
+```php
+$message->user;
+```
+
+#### Gets the group for a message
+```php
+$message->group
+```
+
 
 #### Can add to group logic
 
@@ -127,6 +143,24 @@ public function canRemoveFromGroup(\OhKannaDuh\Groups\Model\Group $group): bool
 {
     # Don't remove the user if they are the last remaining group member
     return count($group) > 1;
+}
+```
+This method just returns `true` by default.
+
+
+#### Can send message to group logic
+
+A similar thing can be done to determine if a user can send a message to a group:
+```php
+public function canSendMessageToGroup(\OhKannaDuh\Groups\Model\Group $group): bool
+```
+
+Here is an example:
+```php
+public function canSendMessageToGroup(\OhKannaDuh\Groups\Model\Group $group): bool
+{
+    # Only users that are admins can send messages to groups
+    return $this->isAdmin();
 }
 ```
 This method just returns `true` by default.
