@@ -23,13 +23,13 @@
         }
     },
     "require": {
-        "php": "^7.2",
-        "block8/php-docblock-checker": "^1.10",
-        "phan/phan": "^2.1"
+        "php": "^7.2"
     },
     "require-dev": {
+        "block8/php-docblock-checker": "^1.10",
         "laravel/laravel": "^5.8",
         "orchestra/testbench": "^3.8",
+        "phan/phan": "^2.1",
         "phpmd/phpmd": "^2.6"
     },
     "extra": {
