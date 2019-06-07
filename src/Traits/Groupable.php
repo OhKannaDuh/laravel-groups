@@ -25,4 +25,13 @@ trait Groupable
     {
         return true;
     }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function canRemoveFromGroup(Group $group): bool
+    {
+        return true;
+    }
 }

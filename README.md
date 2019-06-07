@@ -112,3 +112,21 @@ public function canAddToGroup(\OhKannaDuh\Groups\Model\Group $group): bool
 }
 ```
 This method just returns `true` by default.
+
+
+#### Can remove from group logic
+
+A similar thing can be done to determine if a user can leave a group:
+```php
+public function canRemoveFromGroup(\OhKannaDuh\Groups\Model\Group $group): bool
+```
+
+Here is an example:
+```php
+public function canRemoveFromGroup(\OhKannaDuh\Groups\Model\Group $group): bool
+{
+    # Don't remove the user if they are the last remaining group member
+    return count($group) > 1;
+}
+```
+This method just returns `true` by default.
