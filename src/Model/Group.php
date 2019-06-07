@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use OhKannaDuh\Groups\Contracts\GroupableContract;
 
-class Group extends Model
+class Group extends Model implements \Countable
 {
     /** @var array */
     protected $fillable = [
@@ -80,6 +80,23 @@ class Group extends Model
 
 
     /**
+     * Checks if the given user can be added to this group based on capacity and the user.
+     *
+     * @param GroupableContract $user
+     *
+     * @return bool
+     */
+    public function canAddToGroup(GroupableContract $user): bool
+    {
+        return (
+            $user->canAddToGroup($this) === true &&
+            $this->isAtCapacity() === false &&
+            $this->contains($user) === false
+        );
+    }
+
+
+    /**
      * Removes the given user from the group.
      *
      * @param GroupableContract $user
@@ -88,7 +105,7 @@ class Group extends Model
      */
     private function addUserToGroup(GroupableContract $user): void
     {
-        if ($this->contains($user) === false) {
+        if ($this->canAddToGroup($user)) {
             $this->users()->attach($user->id);
         }
     }
@@ -130,5 +147,35 @@ class Group extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(config("groups.user_class"), "group_user");
+    }
+
+
+    /**
+     * Determines wether this group is at capacity.
+     *
+     * @return bool
+     */
+    private function isAtCapacity(): bool
+    {
+        $count = count($this);
+        $max = config("groups.max_users");
+
+        if ($max <= 0 || $max == false) {
+            return false;
+        }
+
+        return $count >= $max;
+    }
+
+
+    /**
+     * Returns the number of users in this group.
+     *
+     * @return int
+     */
+    public function count(): int
+    {
+        $this->load("users");
+        return count($this->users);
     }
 }

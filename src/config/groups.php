@@ -1,3 +1,5 @@
 <?php
 
-return [];
+return [
+    "max_users" => 0,
+];

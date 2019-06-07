@@ -84,3 +84,29 @@ $group->users
 ```php
 $user->groups
 ```
+
+#### Can add to group logic
+
+You can add this method to your user class to add custom logic for adding users to groups:
+```php
+public function canAddToGroup(\OhKannaDuh\Groups\Model\Group $group): bool
+```
+
+Here is an example:
+```php
+public function canAddToGroup(\OhKannaDuh\Groups\Model\Group $group): bool
+{
+    foreach ($group->users as $user) {
+        /**
+         * This user has been blocked or has blocked the other user.
+         * Don't add them to the group.
+         */
+        if ($user->isBlocked($this) === true) {
+            return false;
+        }
+    }
+
+    return true;
+}
+```
+This method just returns `true` by default.

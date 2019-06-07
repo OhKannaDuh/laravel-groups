@@ -193,4 +193,35 @@ class GroupTest extends TestCase
 
         $this->assertTrue($group->contains($user));
     }
+
+
+    /**
+     * Ensure the model is counted correctly.
+     */
+    public function testCount()
+    {
+        $group = $this->getGroup();
+        factory(User::class, 5)->create();
+
+        $this->assertSame(0, count($group));
+        $group->addUsers(User::all());
+        $this->assertSame(5, count($group));
+    }
+
+
+    /**
+     * Ensure canAddToGroup checks correctly.
+     *
+     * @depends testAddUsers
+     */
+    public function testCanAddToGroup()
+    {
+        config(["groups.max_users" => 4]);
+
+        $group = $this->getGroup();
+        factory(User::class, 5)->create();
+        $group->addUsers(User::all());
+
+        $this->assertSame(4, count($group));
+    }
 }

@@ -10,12 +10,19 @@ trait Groupable
 
 
     /**
-     * Returns all groups this model belongs to.
-     *
-     * @return Relation
+     * @inheritdoc
      */
     public function groups(): Relation
     {
         return $this->belongsToMany(Group::class, "group_user", "user_id", "group_id");
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function canAddToGroup(Group $group): bool
+    {
+        return true;
     }
 }
