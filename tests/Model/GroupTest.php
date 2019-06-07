@@ -2,7 +2,7 @@
 
 namespace OhKannaDuh\Groups\Test\Model;
 
-use App\User;
+use OhKannaDuh\Groups\Test\User;
 use OhKannaDuh\Groups\Model\Group;
 use OhKannaDuh\Groups\Test\TestCase;
 use Illuminate\Support\Facades\DB;

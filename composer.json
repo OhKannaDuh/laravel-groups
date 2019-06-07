@@ -23,7 +23,9 @@
         }
     },
     "require": {
-        "php": "^7.2"
+        "php": "^7.2",
+        "block8/php-docblock-checker": "^1.10",
+        "phan/phan": "^2.1"
     },
     "require-dev": {
         "laravel/laravel": "^5.8",

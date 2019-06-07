@@ -21,15 +21,4 @@ class GroupsServiceProvider extends ServiceProvider
             __DIR__ . "/config/groups.php" => config_path("groups.php"),
         ]);
     }
-
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
 }

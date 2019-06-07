@@ -5,6 +5,7 @@ namespace OhKannaDuh\Groups\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use OhKannaDuh\Groups\Contracts\GroupableContract;
 
 class Group extends Model
 {
@@ -17,11 +18,11 @@ class Group extends Model
     /**
      * Adds a user to a group using the addUserToGroup method and then reloads the users property.
      *
-     * @param Model $user
+     * @param GroupableContract $user
      *
      * @return void
      */
-    public function addUser(Model $user): void
+    public function addUser(GroupableContract $user): void
     {
         $this->addUserToGroup($user);
 
@@ -49,11 +50,11 @@ class Group extends Model
     /**
      * Removes a user from a group using the removeUserFromGroup method and then reloads the users property.
      *
-     * @param Model $user
+     * @param GroupableContract $user
      *
      * @return void
      */
-    public function removeUser(Model $user): void
+    public function removeUser(GroupableContract $user): void
     {
         $this->removeUserFromGroup($user);
 
@@ -81,13 +82,13 @@ class Group extends Model
     /**
      * Removes the given user from the group.
      *
-     * @param Model $user
+     * @param GroupableContract $user
      *
      * @return void
      */
-    private function addUserToGroup(Model $user): void
+    private function addUserToGroup(GroupableContract $user): void
     {
-        if ($this->isUser($user) === true && $this->contains($user) === false) {
+        if ($this->contains($user) === false) {
             $this->users()->attach($user->id);
         }
     }
@@ -96,13 +97,13 @@ class Group extends Model
     /**
      * Removes the given user from the group.
      *
-     * @param Model $user
+     * @param GroupableContract $user
      *
      * @return void
      */
-    private function removeUserFromGroup(Model $user): void
+    private function removeUserFromGroup(GroupableContract $user): void
     {
-        if ($this->isUser($user) === true && $this->contains($user) === true) {
+        if ($this->contains($user) === true) {
             $this->users()->detach($user->id);
         }
     }
@@ -111,11 +112,11 @@ class Group extends Model
     /**
      * Checks if the given user is in this group.
      *
-     * @param Model $user
+     * @param GroupableContract $user
      *
      * @return bool
      */
-    public function contains(Model $user): bool
+    public function contains(GroupableContract $user): bool
     {
         return $this->users->contains($user);
     }
@@ -129,18 +130,5 @@ class Group extends Model
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(config("groups.user_class"), "group_user");
-    }
-
-
-    /**
-     * Checks if a given model is a user.
-     *
-     * @param Model $model
-     *
-     * @return bool
-     */
-    private function isUser(Model $model): bool
-    {
-        return is_a($model, config("groups.user_class"));
     }
 }

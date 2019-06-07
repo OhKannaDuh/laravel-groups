@@ -7,7 +7,7 @@ class CreateGroupUserTable extends Migration
 {
 
 
-/**
+    /**
      * Run the migrations.
      *
      * @return void
@@ -21,16 +21,5 @@ class CreateGroupUserTable extends Migration
             $table->foreign('group_id')->references('id')->on('groups');
             $table->timestamps();
         });
-    }
-
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('group_user');
     }
 }

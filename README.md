@@ -7,7 +7,7 @@ This package allows you to group your user models, you can use this for various 
 First, install the package via composer.
 
 ```sh
-composer require ohkannaduh/laravel-groups
+composer require ohkannaduh/groups
 ```
 
 If you are using Laravel version 5.5 or lower you'll need to register `OhKannaDuh\Groups\GroupsServiceProvider` in your `config/app.php` providers array.
@@ -39,8 +39,9 @@ php artisan migrate
 ```php
 ...
 use OhKannaDuh\Groups\Traits\Groupable;
+use OhKannaDuh\Groups\Contracts\GroupableContract;
 ...
-class User extends Model
+class User extends Model implements GroupableContract
 {
     use Groupable;
     ...

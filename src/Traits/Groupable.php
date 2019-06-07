@@ -2,7 +2,7 @@
 
 namespace OhKannaDuh\Groups\Traits;
 
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use OhKannaDuh\Groups\Model\Group;
 
 trait Groupable
@@ -12,9 +12,9 @@ trait Groupable
     /**
      * Returns all groups this model belongs to.
      *
-     * @return BelongsToMany
+     * @return Relation
      */
-    public function groups(): BelongsToMany
+    public function groups(): Relation
     {
         return $this->belongsToMany(Group::class, "group_user", "user_id", "group_id");
     }

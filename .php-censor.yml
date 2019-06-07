@@ -10,16 +10,41 @@ setup:
     action: install
 
 test:
+
   php_unit:
     config:
       - phpunit.xml
     directories:
       - tests
     coverage: true
+
   security_checker: ~
+
   php_parallel_lint: ~
+
+  pdepend: ~
+
+  phan: ~
+
   php_code_sniffer:
     standard: PSR2
     allowed_errors: -1
+
+  php_cpd: ~
+
+  php_docblock_checker:
+    directory: src
+    skip_classes: true
+
+  php_loc: ~
+
   php_mess_detector:
-    allow_failures: false
+    rules:
+      - cleancode
+      - controversial
+      - codesize
+      - design
+      - naming
+      - unusedcode
+
+  technical_debt: ~

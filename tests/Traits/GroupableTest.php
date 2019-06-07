@@ -2,7 +2,7 @@
 
 namespace OhKannaDuh\Groups\Test\Traits;
 
-use App\User;
+use OhKannaDuh\Groups\Test\User;
 use OhKannaDuh\Groups\Model\Group;
 use OhKannaDuh\Groups\Test\TestCase;
 
@@ -24,11 +24,11 @@ class GroupableTest extends TestCase
     /**
      * Returns a groupable user.
      *
-     * @return GroupableUser
+     * @return User
      */
-    private function getGroupable(): GroupableUser
+    private function getGroupable(): User
     {
-        return GroupableUser::firstOrFail();
+        return User::firstOrFail();
     }
 
 

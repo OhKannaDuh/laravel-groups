@@ -3,7 +3,7 @@
 namespace OhKannaDuh\Groups\Test;
 
 use OhKannaDuh\Groups\GroupsServiceProvider;
-use App\User;
+use OhKannaDuh\Groups\Test\User;
 use Illuminate\Support\Facades\DB;
 
 class TestCase extends \Orchestra\Testbench\TestCase
